@@ -1,49 +1,64 @@
 {
-  "name": "geojsonhint",
-  "description": "validate and sanity-check geojson files",
-  "version": "2.0.0",
-  "author": "Tom MacWright",
-  "bin": {
-    "geojsonhint": "./bin/geojsonhint"
-  },
-  "bugs": {
-    "url": "https://github.com/mapbox/geojsonhint/issues"
-  },
-  "files": [
-    "geojsonhint.js",
-    "bin",
-    "lib"
-  ],
-  "dependencies": {
-    "concat-stream": "~1.5.1",
-    "jsonlint-lines": "1.7.1",
-    "minimist": "1.2.0",
-    "vfile": "2.0.0",
-    "vfile-reporter": "3.0.0"
-  },
-  "devDependencies": {
-    "benchmark": "^2.1.0",
-    "browserify": "13.1.0",
-    "eslint": "^3.0.1",
-    "fuzzer": "~0.2.0",
-    "glob": "~7.0.5",
-    "tap": "7.0.0"
-  },
-  "directories": {
-    "test": "test"
-  },
-  "keywords": [
-    "geojson",
-    "hint"
-  ],
-  "license": "ISC",
-  "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mapbox/geojsonhint.git"
-  },
-  "scripts": {
-    "test": "tap test/*.js --coverage",
-    "prepublish": "browserify . --standalone geojsonhint > geojsonhint.js"
-  }
+    "name": "geojsonhint",
+    "description": "validate and sanity-check geojson files",
+    "version": "2.0.0",
+    "author": "Tom MacWright",
+    "bin": {
+        "geojsonhint": "./bin/geojsonhint"
+    },
+    "bugs": {
+        "url": "https://github.com/mapbox/geojsonhint/issues"
+    },
+    "files": [
+        "geojsonhint.js",
+        "bin",
+        "lib"
+    ],
+    "dependencies": {
+        "concat-stream": "~1.5.1",
+        "jsonlint-lines": "1.7.1",
+        "minimist": "1.2.0",
+        "vfile": "2.0.0",
+        "vfile-reporter": "3.0.0"
+    },
+    "devDependencies": {
+        "benchmark": "^2.1.0",
+        "browserify": "13.1.0",
+        "eslint": "^3.0.1",
+        "fuzzer": "~0.2.0",
+        "glob": "~7.0.5",
+        "tap": "7.0.0",
+        "babel-cli": "latest",
+        "babel-core": "latest",
+        "babel-plugin-add-module-exports": "latest",
+        "babel-plugin-transform-es2015-modules-commonjs": "latest",
+        "babel-polyfill": "latest",
+        "babel-preset-env": "latest",
+        "babel-preset-es2015-without-strict": "latest"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "keywords": [
+        "geojson",
+        "hint"
+    ],
+    "license": "ISC",
+    "main": "lib/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/mapbox/geojsonhint.git"
+    },
+    "scripts": {
+        "test": "tap test/*.js --coverage",
+        "prepublish": "browserify . --standalone geojsonhint > geojsonhint.js",
+        "compile-librhrjs": "babel lib\\rhr.js -o lib\\rhr.js --require babel-polyfill --presets env",
+        "compile-eslintrcjs": "babel .eslintrc.js -o .eslintrc.js --require babel-polyfill --presets env",
+        "compile-libindexjs": "babel lib\\index.js -o lib\\index.js --require babel-polyfill --presets env",
+        "compile-testhinttestjs": "babel test\\hint.test.js -o test\\hint.test.js --require babel-polyfill --presets env",
+        "compile-libobjectjs": "babel lib\\object.js -o lib\\object.js --require babel-polyfill --presets env",
+        "compile-geojsonhintjs": "babel geojsonhint.js -o geojsonhint.js --require babel-polyfill --presets env",
+        "compile-1_script": "npm run compile-librhrjs && npm run compile-eslintrcjs && npm run compile-libindexjs && npm run compile-testhinttestjs && npm run compile-libobjectjs && npm run compile-geojsonhintjs",
+        "compile": "npm run compile-1_script"
+    }
 }
